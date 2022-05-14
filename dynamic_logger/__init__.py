@@ -128,14 +128,16 @@ class Logger(logging.Logger):
         if switch == 'on':
             for handler in eff_handlers:
                 fmt = handler.formatter._fmt
-                self.__og_fmts.append(fmt)
+                dtfmt = handler.formatter.datefmt
+                self.__og_fmts.append([fmt,dtfmt])
                 fmt = self.__remove_custom_format_attributes(fmt)
-                handler.setFormatter(logging.Formatter(fmt))
+                handler.setFormatter(logging.Formatter(fmt=fmt, datefmt=dtfmt))
         else:
             for i, handler in enumerate(eff_handlers):
-                fmt = self.__og_fmts[i]
-                self.__og_fmts.remove(fmt)
-                handler.setFormatter(logging.Formatter(fmt))
+                fmt = self.__og_fmts[i][0]
+                dtfmt = self.__og_fmts[i][1]
+                self.__og_fmts.remove([fmt,dtfmt])
+                handler.setFormatter(logging.Formatter(fmt=fmt, datefmt=dtfmt))
             self.__og_fmts = []
 
     def __remove_custom_format_attributes(self, fmt) -> str:
