@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "dynamic_logger"
-version = "1.0.1"
+version = "1.0.2"
 description = "Dynamic Logger Class for logging"
 authors = ["ajatkj <ajatkj@yahoo.co.in>"]
 keywords = ["logging", "extra_logging", "dynamic_logging"]
