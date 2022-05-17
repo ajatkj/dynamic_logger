@@ -13,9 +13,10 @@ fmt = '[%(asctime)s] <%(app)s> [%(levelname)s] (%(funcName)s) [%(id)s] [%(custom
 logging.basicConfig(format=fmt, datefmt='%d-%b-%y %H:%M:%S', level='INFO')
 logging.setLoggerClass(dynamic_logger.Logger)
 applogger = logging.getLogger(__name__)
+# print(logging.getLogRecordFactory())
 
 
-@applogger.log_extras('id',int=0,customer_id='obj.customer_id') # Log value of 'id' and 'obj.customer_id'
+@applogger.log_extras('id',int=0,customer_id='obj.customer_id',id1='id2') # Log value of 'id' and 'obj.customer_id'
 def example_1(a,id=0,id2=0,obj=None):
     applogger.info('This example shows how to log values from function arguments')
 
@@ -36,7 +37,7 @@ def example_5(input_model):
     applogger.info(f'Using position number instead of argument name (This is same as example_2)')
 
 if __name__ == '__main__':
-    example_1(0, id=7192370129382,id2=2,obj={'customer_id': 829201024})
+    example_1(0, id=7192370129382,id2=None,obj={'customer_id': 829201024})
     u = UserModel(user_id=8888888)
     example_2(input_model=u)
     example_3('hello there')
